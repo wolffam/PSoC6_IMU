@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="us-ascii"?>
+
+<fileSet version="1" anchorPath="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp" xsi:schemaLocation="http://cypress.com/xsd/cypathdictionary cypathdictionary.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://cypress.com/xsd/cypathdictionary">
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cyfitter_cfg.h" value="HEADER;;;;;" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cyfitter_sysint_cfg.h" value="HEADER;;;;;Pins and Interrupts" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cyfitter_sysint_cfg.c" value="SOURCE_C;CortexM0p,CortexM4;;;;Pins and Interrupts" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cyfitter_cfg.c" value="SOURCE_C;CortexM0p;;;;" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cymetadata.c" value="SOURCE_C;CortexM0p,CortexM4;;;;" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cydevice_trm.h" value="HEADER;;;;;" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cydevicegnu_trm.inc" value="HEADER;;;;;" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cydevicerv_trm.inc" value="HEADER;;;;;" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cydeviceiar_trm.inc" value="HEADER;;;;;" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cyfitter.h" value="HEADER;;;;;" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cyfitter_gpio.h" value="HEADER;;;;;Pins and Interrupts" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cyfitter_sysint.h" value="HEADER;;;;;Pins and Interrupts" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cydisabledsheets.h" value="HEADER;;;;;" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\I2C_bus.c" value="SOURCE_C;CortexM0p,CortexM4;;;;I2C_bus" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\I2C_bus.h" value="HEADER;;;;;I2C_bus" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\UART_bus.c" value="SOURCE_C;CortexM0p,CortexM4;;;;UART_bus" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\UART_bus.h" value="HEADER;;;;;UART_bus" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\I2C_bus_SCBCLK.h" value="HEADER;;;;;I2C_bus_SCBCLK" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\UART_bus_SCBCLK.h" value="HEADER;;;;;UART_bus_SCBCLK" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\project.h" value="OTHER;;;;;" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cycodeshareimport.ld" value="OTHER;;;;;" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cycodeshareexport.ld" value="OTHER;;;;;" />
+  <file name="D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\codegentemp\cycodeshareimport.scat" value="OTHER;;;;;" />
+</fileSet>

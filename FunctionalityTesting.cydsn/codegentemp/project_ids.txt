@@ -1,0 +1,6 @@
+D:\Code\PSoC6_IMU\FunctionalityTesting.cydsn\FunctionalityTesting.cyprj|999b0047-451d-4f99-bc1f-a04097e153fa
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|33eed254-550a-40ad-b290-c1c6a6908ab2
+C:\Users\alex\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|d7f2133d-564d-4966-b2eb-f1df7529c43e
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|e1cba538-81f5-4047-ac5f-26a9e1d9bf5e
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|0a0d9e98-35df-4c5d-8be0-eef076e3a035
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|889e33db-ab49-4230-a838-90bb1fa64a9c
