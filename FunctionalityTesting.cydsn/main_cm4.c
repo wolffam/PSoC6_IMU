@@ -1,16 +1,6 @@
-/* ========================================
- *
- * Copyright YOUR COMPANY, THE YEAR
- * All Rights Reserved
- * UNPUBLISHED, LICENSED SOFTWARE.
- *
- * CONFIDENTIAL AND PROPRIETARY INFORMATION
- * WHICH IS THE PROPERTY OF your company.
- *
- * ========================================
-*/
 #include "project.h"
 #include "stdio.h"
+#include <stdlib.h> 
 #include "bmi160.h"
 #include "time.h"
 
@@ -55,6 +45,7 @@ int main(void)
     __enable_irq(); /* Enable global interrupts. */
     UART_bus_Start();  
     I2C_bus_Start();
+    RTC_Start();
     
     CyDelay(100);
     myBmi160.interface = BMI160_I2C_INTF;
@@ -80,39 +71,41 @@ int main(void)
     
     struct bmi160_sensor_data acceleration;
     struct bmi160_sensor_data gyro;
-    uint8 reg_id;
-    uint8 reg_data;
-    float acc_x, acc_y, acc_z;
-    uint32 accel_time, gyro_time;
-    #define MAXACCEL (32768/2)
-    time_t seconds_from_epoch;
-    uint8 rlst;
+    float acc_x, acc_y, acc_z, gyro_x, gyro_y, gyro_z;
+    uint32 sensor_time;
+    #define MAXACCEL (32768/2)     // +/- 2G max
+    #define MAXROTATE (32768/2000) // Degrees per second
+
+    uint8 ret;
+    ret = Cy_RTC_Init(&RTC_config);
+    if (ret != CY_RTC_SUCCESS)
+        printf("Failed to init date and time config");
+    cy_stc_rtc_config_t dateTime;
     
-    rlst = bmi160_get_regs(0x00, &reg_id, 1, &myBmi160);
-    if (rlst != 0)
-    {
-        printf("Could not get ID...");
-    }
-    else
-    {
-        //printf("Printing ID: ");
-        //printf("0x%x\r\n", reg_id);
-        rlst = bmi160_get_regs(0x03, &reg_data, 1, &myBmi160);
-        //printf("0x%x\r\n", reg_data);
-    }
     
     for(;;)
-    {
+    {   
+        RTC_GetDateAndTime(&dateTime);
+        printf("%02u/%02u/%02u",(uint16_t) dateTime.date, 
+                (uint16_t) dateTime.month, (uint16_t) dateTime.year);
+        printf(" %02u:%02u:%02u", (uint16_t) dateTime.hour, 
+                (uint16_t) dateTime.min, (uint16_t) dateTime.sec);
+        
         bmi160_get_sensor_data((BMI160_ACCEL_SEL | BMI160_GYRO_SEL | BMI160_TIME_SEL), &acceleration, &gyro, &myBmi160);
-    
+        
         acc_x = (float)acceleration.x/MAXACCEL;
         acc_y = (float)acceleration.y/MAXACCEL;
         acc_z = (float)acceleration.z/MAXACCEL;
-        accel_time = acceleration.sensortime;
-        time(&seconds_from_epoch);
-        printf("%ul    %ld    x=%1.2f y=%1.2f z=%1.2f\r\n", accel_time, seconds_from_epoch, acc_x, acc_y, acc_z);
-
-        CyDelay(100);
+        
+        gyro_x = (float)gyro.x/MAXROTATE;
+        gyro_y = (float)gyro.y/MAXROTATE;
+        gyro_z = (float)gyro.z/MAXROTATE;
+        
+        sensor_time = acceleration.sensortime;
+       
+        //printf("    %ul    x=%1.2f y=%1.2f z=%1.2f\r\n\r\n", sensor_time, acc_x, acc_y, acc_z);
+        printf("    %ul    x=%1.2f y=%1.2f z=%1.2f\r\n\r\n", sensor_time, gyro_x, gyro_y, gyro_z);
+        CyDelay(1000);
     }
 }
 
