@@ -12,6 +12,7 @@
 #include "project.h"
 #include "stdio.h"
 #include "bmi160.h"
+#include "time.h"
 
 static struct bmi160_dev myBmi160;
 
@@ -23,6 +24,7 @@ static int8_t BMI160BurstWrite(uint8_t dev_addr, uint8_t reg_addr, uint8_t *data
     for(int i = 0;i<len; i++)
     {
         Cy_SCB_I2C_MasterWriteByte(I2C_bus_HW, dataw[i], 0, &I2C_bus_context);
+        //printf("Write 0x%x -> 0x%x\r\n", reg_addr, dataw[i]);
     }
     Cy_SCB_I2C_MasterSendStop(I2C_bus_HW, 0, &I2C_bus_context);
     
@@ -38,9 +40,10 @@ static int8_t BMI160BurstRead(uint8_t dev_addr, uint8_t reg_addr, uint8_t *datar
     for(int i = 0;i<len-1; i++)
     {
         Cy_SCB_I2C_MasterReadByte(I2C_bus_HW, CY_SCB_I2C_ACK, &datar[i], 0, &I2C_bus_context);
-        
+        //printf("Read 0x%x ->  0x%x\r\n", reg_addr, datar[i]);
     }
     Cy_SCB_I2C_MasterReadByte(I2C_bus_HW, CY_SCB_I2C_NAK, &datar[len-1], 0, &I2C_bus_context);
+     //printf("Read 0x%x 0x%x\r\n", reg_addr, datar[len-1]);
     
     Cy_SCB_I2C_MasterSendStop(I2C_bus_HW, 0, &I2C_bus_context);
     
@@ -72,23 +75,44 @@ int main(void)
     myBmi160.accel_cfg.bw = BMI160_ACCEL_BW_NORMAL_AVG4;
     myBmi160.accel_cfg.power = BMI160_ACCEL_NORMAL_MODE;
     
+    /* Set the sensor configuration */
+    bmi160_set_sens_conf(&myBmi160);
+    
     struct bmi160_sensor_data acceleration;
     struct bmi160_sensor_data gyro;
+    uint8 reg_id;
+    uint8 reg_data;
     float acc_x, acc_y, acc_z;
+    uint32 accel_time, gyro_time;
     #define MAXACCEL (32768/2)
+    time_t seconds_from_epoch;
+    uint8 rlst;
+    
+    rlst = bmi160_get_regs(0x00, &reg_id, 1, &myBmi160);
+    if (rlst != 0)
+    {
+        printf("Could not get ID...");
+    }
+    else
+    {
+        //printf("Printing ID: ");
+        //printf("0x%x\r\n", reg_id);
+        rlst = bmi160_get_regs(0x03, &reg_data, 1, &myBmi160);
+        //printf("0x%x\r\n", reg_data);
+    }
     
     for(;;)
     {
-        bmi160_get_sensor_data(BMI160_ACCEL_ONLY, &acceleration, NULL, &myBmi160);
-    
+        bmi160_get_sensor_data((BMI160_ACCEL_SEL | BMI160_GYRO_SEL | BMI160_TIME_SEL), &acceleration, &gyro, &myBmi160);
     
         acc_x = (float)acceleration.x/MAXACCEL;
         acc_y = (float)acceleration.y/MAXACCEL;
         acc_z = (float)acceleration.z/MAXACCEL;
-        
-        printf("x=%1.2f y=%1.2f z=%1.2f\r\n", acc_x, acc_y, acc_z);
+        accel_time = acceleration.sensortime;
+        time(&seconds_from_epoch);
+        printf("%ul    %ld    x=%1.2f y=%1.2f z=%1.2f\r\n", accel_time, seconds_from_epoch, acc_x, acc_y, acc_z);
 
-        CyDelay(1000);
+        CyDelay(100);
     }
 }
 
